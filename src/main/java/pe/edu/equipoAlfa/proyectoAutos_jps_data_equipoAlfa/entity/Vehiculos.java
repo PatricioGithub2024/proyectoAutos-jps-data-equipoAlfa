@@ -18,17 +18,22 @@ public class Vehiculos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_vehi;
+    private Integer idVehi;
     private String nombre;
     private String detalles;
-    private Date fecha_registro;
+    private Boolean activo;
+    private Date fecha_lanzamiento;
     private Integer stock;
     private Double precio;
-    private Date last_update;
 
     @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "id_cat")
     private CatVehiculos cat_vehiculos;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastUpdate;
+    @PrePersist
+    protected void onCreate() { lastUpdate = new Date(); }
 
 }

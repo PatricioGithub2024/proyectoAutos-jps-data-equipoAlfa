@@ -10,7 +10,7 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
-:root {
+ :root {
   --blue: #4e73df;
   --indigo: #6610f2;
   --purple: #6f42c1;
@@ -2391,6 +2391,46 @@ fieldset:disabled a.btn {
 .show > .btn-primary.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(105, 136, 228, 0.5);
 }
+
+
+.btn-default {
+    color: #fff;
+    background-color: #858796;
+    border-color: #858796;
+}
+
+.btn-default:hover {
+    color: #fff;
+    background-color: #717384;
+    border-color: #6b6d7d;
+}
+
+.btn-default:focus, .btn-default.focus {
+    color: #fff;
+    background-color: #717384;
+    border-color: #6b6d7d;
+    box-shadow: 0 0 0 0.2rem rgba(151, 153, 166, 0.5);
+}
+
+.btn-default.disabled, .btn-default:disabled {
+    color: #fff;
+    background-color: #858796;
+    border-color: #858796;
+}
+
+.btn-default:not(:disabled):not(.disabled):active, .btn-default:not(:disabled):not(.disabled).active,
+.show > .btn-default.dropdown-toggle {
+    color: #fff;
+    background-color: #6b6d7d;
+    border-color: #656776;
+}
+
+.btn-default:not(:disabled):not(.disabled):active:focus, .btn-default:not(:disabled):not(.disabled).active:focus,
+.show > .btn-default.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(151, 153, 166, 0.5);
+}
+
+
 
 .btn-secondary {
   color: #fff;
@@ -9899,11 +9939,21 @@ a:focus {
   animation-timing-function: opacity cubic-bezier(0, 1, 0.4, 1);
 }
 
-.bg-gradient-primary {
+/* .bg-gradient-primary {
   background-color: #4e73df;
   background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
   background-size: cover;
+} */
+
+.bg-gradient-primary {
+  background-color: #004A93;
+  background-size: cover;
 }
+
+.bg-second-primary{
+  background-color: #004A93 !important;
+}
+
 
 .bg-gradient-secondary {
   background-color: #858796;
@@ -9918,10 +9968,15 @@ a:focus {
 }
 
 .bg-gradient-info {
+  background-color: #004A93;
+  background-size: cover;
+}
+
+/* .bg-gradient-info {
   background-color: #36b9cc;
   background-image: linear-gradient(180deg, #36b9cc 10%, #258391 100%);
   background-size: cover;
-}
+} */
 
 .bg-gradient-warning {
   background-color: #f6c23e;
@@ -10861,19 +10916,20 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800");
+  background: url("https://images.unsplash.com/photo-1541574823565-f1d660886187?w=600");
+  /* background: url("https://source.unsplash.com/K4mSJ7kc0As/600x800"); */
   background-position: center;
   background-size: cover;
 }
 
 .bg-register-image {
-  background: url("https://source.unsplash.com/Mv9hjnEUHR4/600x800");
+  background: url("https://images.unsplash.com/photo-1541574823565-f1d660886187?w=600");
   background-position: center;
   background-size: cover;
 }
 
 .bg-password-image {
-  background: url("https://source.unsplash.com/oWTW-jNGl9I/600x800");
+  background: url("https://images.unsplash.com/photo-1541574823565-f1d660886187?w=600");
   background-position: center;
   background-size: cover;
 }

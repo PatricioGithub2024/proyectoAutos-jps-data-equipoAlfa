@@ -124,6 +124,16 @@ public class MaintenanceServiceImpl implements MaintenanceService {
 
     }
 
+    @Override
+    public boolean deleteClientesById(int id) throws Exception {
+        Optional<Clientes> optional = clienteRepository.findById(id);
+        return optional.map(clien -> {
+            clienteRepository.delete(clien);
+            return true;
+        }).orElse(false);
+    }
+
+
 //    @Override
 //    public ClientesDetallesDto getClientById(Integer id) {
 //        Optional<Clientes> optional = clienteRepository.findById(id);

@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface MaintenanceService {
 
+    //para clientes
+
     List<ClientesListarDto> getAllClients();
     ClientesDetallesDto getClienteDetalleById(Integer id);
     void registrarCliente(ClientesRegistrarDto clientesRegistrarDto);
@@ -16,5 +18,12 @@ public interface MaintenanceService {
 
     //para Borrar
     public void postClientesBorrarById(int id, ClientesBorrarDto clientesBorrarDto);
+
+    //borrar prueba
+    public boolean deleteClientesById(int id) throws Exception;
+
+    //para vehiculos
+
+
 
 }

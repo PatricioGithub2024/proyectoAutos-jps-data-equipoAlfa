@@ -56,13 +56,21 @@ public class MaintenanceController {
         return "redirect:/clientes/listar";
     }
 
+//    @PostMapping("/delete/{id}")
+//    public String deleteFilmById(@PathVariable int id, @ModelAttribute ClientesBorrarDto clientesBorrarDto) {
+//        maintenanceService.postClientesBorrarById(id, clientesBorrarDto);
+//        return "redirect:/clientes/listar";
+//    }
+
     @PostMapping("/delete/{id}")
-    public String deleteFilmById(@PathVariable int id, @ModelAttribute ClientesBorrarDto clientesBorrarDto) {
-        maintenanceService.postClientesBorrarById(id, clientesBorrarDto);
+    public String deleteClienteById(@PathVariable int id) {
+        try {
+            maintenanceService.deleteClientesById(id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         return "redirect:/clientes/listar";
     }
-
-
 
 
 }
