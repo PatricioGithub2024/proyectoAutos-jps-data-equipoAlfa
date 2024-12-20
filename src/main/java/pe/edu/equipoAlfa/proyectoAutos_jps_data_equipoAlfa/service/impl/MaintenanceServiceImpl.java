@@ -5,20 +5,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 //import pe.edu.equipoAlfa.proyectoAutos_jps_data_equipoAlfa.dto.ClientesDetallesDto;
 import pe.edu.equipoAlfa.proyectoAutos_jps_data_equipoAlfa.dto.*;
+import pe.edu.equipoAlfa.proyectoAutos_jps_data_equipoAlfa.entity.CatVehiculos;
 import pe.edu.equipoAlfa.proyectoAutos_jps_data_equipoAlfa.entity.Clientes;
+import pe.edu.equipoAlfa.proyectoAutos_jps_data_equipoAlfa.entity.Vehiculos;
+import pe.edu.equipoAlfa.proyectoAutos_jps_data_equipoAlfa.repository.CatVehiculoRepository;
 import pe.edu.equipoAlfa.proyectoAutos_jps_data_equipoAlfa.repository.ClienteRepository;
+import pe.edu.equipoAlfa.proyectoAutos_jps_data_equipoAlfa.repository.VehiculoRepository;
 import pe.edu.equipoAlfa.proyectoAutos_jps_data_equipoAlfa.service.MaintenanceService;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class MaintenanceServiceImpl implements MaintenanceService {
 
     @Autowired
     private ClienteRepository clienteRepository;
+
+    @Autowired
+    private VehiculoRepository vehiculoRepository;
+
+    @Autowired
+    private CatVehiculoRepository catVehiculoRepository;
+
+    @Override
+    public List<CatVehiculos> getAllCategorias() {
+        Iterable<CatVehiculos> iterable = catVehiculoRepository.findAll();
+        return StreamSupport.stream(iterable.spliterator(), false)
+                .collect(Collectors.toList());
+    }
 
     @Override
     public List<ClientesListarDto> getAllClients() {
@@ -134,13 +153,105 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     }
 
 
-//    @Override
-//    public ClientesDetallesDto getClientById(Integer id) {
-//        Optional<Clientes> optional = clienteRepository.findById(id);
-//        return optional.map(cliente -> new ClientesDetallesDto(
-//                cliente.getUsername(),
-//                cliente.getContrasenia()
-//        )).orElse(null);
-//    }
+    // VEHICULOS
+
+    @Override
+    public List<VehiculosListarDto> getAllVehiculos() {
+        List<VehiculosListarDto> vehiculosDtoList = new ArrayList<>();
+        Iterable<Vehiculos> iterable = vehiculoRepository.findAll();
+        iterable.forEach(vehiculo -> {
+            VehiculosListarDto vehiculosListar = new VehiculosListarDto(
+                    vehiculo.getIdVehi(),
+                    vehiculo.getNombre(),
+                    vehiculo.getDetalles(),
+                    vehiculo.getActivo(),
+                    vehiculo.getFecha_lanzamiento(),
+                    vehiculo.getStock(),
+                    vehiculo.getPrecio(),
+                    vehiculo.getCat_vehiculos().getTipo(), // Asumiendo que 'Tipo' es la categoría
+                    vehiculo.getLastUpdate()
+            );
+            vehiculosDtoList.add(vehiculosListar);
+        });
+        return vehiculosDtoList;
+    }
+
+
+    // categoria de vehiculos
+
+    @Override
+    public CatVehiculoDetalles getCategoriaDetalleByVehiculoId(Integer id) {
+        Vehiculos vehiculo = vehiculoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Vehículo no encontrado: " + id));
+        CatVehiculos categoria = vehiculo.getCat_vehiculos();
+        return new CatVehiculoDetalles(
+                categoria.getId_cat(),
+                categoria.getMarca(),
+                categoria.getTipo(),
+                categoria.getActivo(),
+                categoria.getTipo(),
+                categoria.getDescripcion()
+        );
+    }
+
+    @Override
+    public void registrarVehiculo(VehiculosRegistrarDto vehiculosRegistrarDto) {
+        Vehiculos vehiculo = new Vehiculos();
+        vehiculo.setNombre(vehiculosRegistrarDto.nombre());
+        vehiculo.setDetalles(vehiculosRegistrarDto.detalles());
+        vehiculo.setActivo(vehiculosRegistrarDto.activo());
+        vehiculo.setFecha_lanzamiento(vehiculosRegistrarDto.fecha_lanzamiento());
+        vehiculo.setStock(vehiculosRegistrarDto.stock());
+        vehiculo.setPrecio(vehiculosRegistrarDto.precio());
+
+        CatVehiculos categoria = catVehiculoRepository.findById(vehiculosRegistrarDto.id_cat()) // Aquí usamos id_cat
+                .orElseThrow(() -> new IllegalArgumentException("Categoría no encontrada: " + vehiculosRegistrarDto.id_cat()));
+        vehiculo.setCat_vehiculos(categoria);
+
+        vehiculo.setLastUpdate(new Date());
+
+        vehiculoRepository.save(vehiculo);
+    }
+
+    @Override
+    public void eliminarVehiculo(Integer idVehi) {
+        vehiculoRepository.deleteById(idVehi);
+    }
+
+    @Override
+    public VehiculosEditarDto getVehiculoById(Integer idVehi) {
+        Vehiculos vehiculo = vehiculoRepository.findById(idVehi)
+                .orElseThrow(() -> new IllegalArgumentException("Vehículo no encontrado: " + idVehi));
+        return new VehiculosEditarDto(
+                vehiculo.getIdVehi(),
+                vehiculo.getNombre(),
+                vehiculo.getDetalles(),
+                vehiculo.getActivo(),
+                vehiculo.getFecha_lanzamiento(),
+                vehiculo.getStock(),
+                vehiculo.getPrecio(),
+                vehiculo.getCat_vehiculos().getId_cat()
+        );
+    }
+
+    @Override
+    public void actualizarVehiculo(VehiculosEditarDto vehiculosEditarDto) {
+        Vehiculos vehiculo = vehiculoRepository.findById(vehiculosEditarDto.idVehi())
+                .orElseThrow(() -> new IllegalArgumentException("Vehículo no encontrado: " + vehiculosEditarDto.idVehi()));
+
+        vehiculo.setNombre(vehiculosEditarDto.nombre());
+        vehiculo.setDetalles(vehiculosEditarDto.detalles());
+        vehiculo.setActivo(vehiculosEditarDto.activo());
+        vehiculo.setFecha_lanzamiento(vehiculosEditarDto.fecha_lanzamiento());
+        vehiculo.setStock(vehiculosEditarDto.stock());
+        vehiculo.setPrecio(vehiculosEditarDto.precio());
+
+        CatVehiculos categoria = catVehiculoRepository.findById(vehiculosEditarDto.id_cat())
+                .orElseThrow(() -> new IllegalArgumentException("Categoría no encontrada: " + vehiculosEditarDto.id_cat()));
+        vehiculo.setCat_vehiculos(categoria);
+
+        vehiculo.setLastUpdate(new Date());
+        vehiculoRepository.save(vehiculo);
+    }
 
 }

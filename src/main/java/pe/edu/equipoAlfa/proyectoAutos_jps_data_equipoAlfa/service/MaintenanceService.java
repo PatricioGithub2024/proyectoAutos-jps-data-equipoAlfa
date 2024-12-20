@@ -1,6 +1,7 @@
 package pe.edu.equipoAlfa.proyectoAutos_jps_data_equipoAlfa.service;
 
 import pe.edu.equipoAlfa.proyectoAutos_jps_data_equipoAlfa.dto.*;
+import pe.edu.equipoAlfa.proyectoAutos_jps_data_equipoAlfa.entity.CatVehiculos;
 
 import java.util.List;
 
@@ -22,7 +23,32 @@ public interface MaintenanceService {
     //borrar prueba
     public boolean deleteClientesById(int id) throws Exception;
 
-    //para vehiculos
+    //---------------------------------------------para vehiculos----------------------------------------------//
+
+    // para listar vehiculos
+
+    List<VehiculosListarDto> getAllVehiculos();
+
+    // para registrar
+    void registrarVehiculo(VehiculosRegistrarDto vehiculosRegistrarDto);
+
+    // para listar
+    List<CatVehiculos> getAllCategorias();
+
+    // para eliminar
+    void eliminarVehiculo(Integer idVehi);
+
+    // para actualizar ( recoge id de vehiculo )
+    VehiculosEditarDto getVehiculoById(Integer idVehi);
+
+    // para actualizar ( settea la nueva actualización )
+    void actualizarVehiculo(VehiculosEditarDto vehiculosEditarDto);
+
+    //para categoria
+
+    // detalles categoria para vehiculo
+    CatVehiculoDetalles getCategoriaDetalleByVehiculoId(Integer id);
+
 
 
 

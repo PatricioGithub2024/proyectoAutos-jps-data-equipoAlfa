@@ -13,14 +13,14 @@
     <meta name="author" content="">
 
     <title>SB Admin 2 - Dashboard</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 </head>
 
 <body>
 
 <!-- Page Wrapper -->
+
             <div class="container-fluid" layout:fragment="page-content">
                 <div class="col-xl-12 col-md-12 mb-4">
 
@@ -28,7 +28,16 @@
 
                     <br>
                     <div class="container">
-                    <a href="/clientes/registrar" class="btn btn-info mb-3" style="padding: 10px 20px;">Registrar Nuevo Cliente</a>
+
+<!--                    <a href="/clientes/registrar" class="btn btn-info mb-3" style="padding: 10px 20px;">Registrar Nuevo Cliente</a>-->
+
+                        <div class="d-flex align-items-center">
+                            <!-- BOTÓN PARA IR A AGREGAR REGISTROS-->
+                            <a href="/clientes/registrar" class="btn btn-custom me-2">
+                            <img th:src="@{/img/boton_agregar.png}" alt="AgregarProducto" width="40px" height="40px" /> Registrar Nuevo Cliente
+                            </a>
+
+                        </div>
 
                     <br>
 
@@ -68,13 +77,15 @@
                                         </button>
                                     </form>
                                 </td>
+
                                 <td style="width: auto; text-align: center;">
-                                    <form th:action="@{/clientes/delete/{id}(id=${client.idUsuario})}" method="post" style="margin: 0;" class="delete-form" >
-                                        <button type="button" class="btn btn-danger w-auto text-center px-3">
+                                    <form th:action="@{/clientes/delete/{id}(id=${client.idUsuario})}" method="post" style="margin: 0;" >
+                                        <button type="submit" class="btn btn-danger w-auto text-center px-3" >
                                             Eliminar
                                         </button>
                                     </form>
                                 </td>
+
 
                             </tr>
                             </tbody>
@@ -90,44 +101,10 @@
 <!--OTRO SCRIPTS PARA PAGINAS-->
 <th:block layout:fragment="page-scripts">
 
+
 </th:block>
 
 
 </body>
 
 </html>
-
-
-<script>
-    document.querySelectorAll(".delete-btn").forEach((button) => {
-        button.addEventListener("click", function () {
-            const form = this.closest("form"); // Encuentra el formulario más cercano
-
-            Swal.fire({
-                title: "¿Estás seguro?",
-                text: "¡No podrás revertir esta acción!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonText: "Sí, eliminar",
-                cancelButtonText: "No, cancelar",
-                customClass: {
-                    confirmButton: "btn btn-success",
-                    cancelButton: "btn btn-danger"
-                },
-                buttonsStyling: false
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Envía el formulario si el usuario confirma
-                    form.submit();
-                } else if (result.dismiss === Swal.DismissReason.cancel) {
-                    Swal.fire(
-                        "Cancelado",
-                        "El cliente no fue eliminado.",
-                        "error"
-                    );
-                }
-            });
-        });
-    });
-
-</script>
