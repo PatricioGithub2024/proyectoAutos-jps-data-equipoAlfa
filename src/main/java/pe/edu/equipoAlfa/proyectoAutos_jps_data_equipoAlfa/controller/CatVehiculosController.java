@@ -79,5 +79,11 @@ public class CatVehiculosController {
         return "redirect:/catvehiculos/catlistar";
     }
 
+    @GetMapping("/catdetalles/{id}")
+    public String detalleCatVehiculo(@PathVariable("id") Integer id, Model model) {
+        CatVehiculosDetallesDto detallecatvheiculo = maintenanceCatVehiService.getCatVehiculoDetalleById(id);
+        model.addAttribute("catvehiculos", detallecatvheiculo);
+        return "catvehiculos-catdetalles";
+    }
 
 }

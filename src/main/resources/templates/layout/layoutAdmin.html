@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
+
 xmlns:th="http://www.thymeleaf.org"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:fragment="head">
@@ -39,11 +40,11 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
       <div class="sidebar-brand-icon">
         <i class="fas fa-desktop"></i>
       </div>
-      <div class="sidebar-brand-text mx-3">MI TIENDA</div>
+      <div class="sidebar-brand-text mx-3">HOT DRIFTER¨S PERÚ</div>
     </a>
 
     <!-- Divider -->
@@ -51,9 +52,9 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-      <a class="nav-link" href="index.html">
+      <a class="nav-link" href="/vehiculos/cartilla">
         <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Dashboard</span></a>
+        <span>TIENDA VIRTUAL</span></a>
     </li>
 
     <!-- Nav Item - Admnistración Collapse Menu -->
@@ -77,12 +78,12 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInventario"
          aria-expanded="true" aria-controls="collapseInventario">
         <i class="fas fa-fw fa-clipboard-list"></i>
-        <span>Inventario</span>
+        <span>Usuarios</span>
       </a>
       <div id="collapseInventario" class="collapse" aria-labelledby="headingInventario" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="categorias.html">Categorias</a>
-          <a class="collapse-item" href="productos.html">Productos</a>
+          <a class="collapse-item" href="/admins">Administradores</a>
+          <a class="collapse-item" href="/clientes/listar">Clientes</a>
         </div>
       </div>
     </li>
@@ -92,12 +93,14 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVenta"
          aria-expanded="true" aria-controls="collapseVenta">
         <i class="fas fa-fw fa-tags"></i>
-        <span>Ventas</span>
+        <span>Registros</span>
       </a>
       <div id="collapseVenta" class="collapse" aria-labelledby="headingInventario" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="nueva_venta.html">Nueva Venta</a>
-          <a class="collapse-item" href="historial_venta.html">Historial Venta</a>
+          <a class="collapse-item" href="/vehiculos/registrar">Registrar Vehiculos</a>
+          <a class="collapse-item" href="/catvehiculos/catregistrar">Registrar Categorias</a>
+          <a class="collapse-item" href="/clientes/registrar">Registrar Clientes</a>
+          <a class="collapse-item" href="/carrito/comprar">Registrar Ventas</a>
         </div>
       </div>
     </li>
@@ -107,11 +110,14 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes"
          aria-expanded="true" aria-controls="collapseReportes">
         <i class="fas fa-fw fa-chart-area"></i>
-        <span>Reportes</span>
+        <span>Reporte de Ventas</span>
       </a>
       <div id="collapseReportes" class="collapse" aria-labelledby="headingInventario" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="reporte_venta.html">Reporte de Ventas</a>
+          <a class="collapse-item" href="/carrito/listar">Listado Ventas</a>
+          <a class="collapse-item" href="/carrito/comprar">Registrar Ventas</a>
+
+
         </div>
       </div>
     </li>
@@ -149,7 +155,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
           <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+              <span class="mr-2 d-none d-lg-inline text-gray-600 small" >BIENVENIDO PATRICIO</span>
               <img class="img-profile rounded-circle"
                    src="https://images.unsplash.com/photo-1519648023493-d82b5f8d7b8a?w=300">
             </a>
@@ -161,10 +167,12 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
                 Perfil
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+              <form class="d-flex" method="post" href="/clientes/restricted">
+              <button class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                 Salir
-              </a>
+              </button>
+                </form>
             </div>
           </li>
 

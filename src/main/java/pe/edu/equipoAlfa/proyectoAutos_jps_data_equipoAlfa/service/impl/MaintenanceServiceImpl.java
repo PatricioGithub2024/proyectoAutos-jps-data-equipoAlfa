@@ -177,7 +177,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     }
 
 
-    // categoria de vehiculos
+    // Categoria de Vehiculos
 
     @Override
     public CatVehiculoDetalles getCategoriaDetalleByVehiculoId(Integer id) {
@@ -253,5 +253,6 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         vehiculo.setLastUpdate(new Date());
         vehiculoRepository.save(vehiculo);
     }
+
 
 }

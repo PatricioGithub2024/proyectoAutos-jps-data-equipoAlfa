@@ -43,7 +43,7 @@
 
                         <table class="table table-striped table-bordered">
                             <thead class="thead-dark">
-                            <tr>
+                            <tr class="text-center">
 
                                 <th>ID Usuario</th>
                                 <th>Nombre</th>
@@ -58,7 +58,7 @@
                             </thead>
                             <tbody>
                             <tr th:each="client : ${clients}">
-                                <td th:text="${client.idUsuario}"></td>
+                                <td class="text-center" th:text="${client.idUsuario}"></td>
                                 <td th:text="${client.nombre}"></td>
                                 <td th:text="${client.apellidos}"></td>
                                 <td th:text="${client.direccion}"></td>

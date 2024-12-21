@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -32,6 +33,11 @@ public class Clientes {
 
     @PrePersist
     protected void onCreate() { fechaRegistro = new Date(); }
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "cliente")
+    private List<CarritoCompras> carrito;
+
 //
 //    public Integer getIdUsuario() {
 //        return idUsuario;

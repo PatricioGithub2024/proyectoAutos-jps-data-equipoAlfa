@@ -8,6 +8,7 @@ import lombok.ToString;
 
 
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -30,6 +31,12 @@ public class Vehiculos {
     @ManyToOne
     @JoinColumn(name = "id_cat")
     private CatVehiculos cat_vehiculos;
+
+    //para carrito
+    @ToString.Exclude
+    @OneToMany(mappedBy = "vehiculo")
+    private List<CarritoCompras> carrito;
+
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdate;

@@ -41,7 +41,7 @@
 
             <table class="table table-striped table-bordered">
                 <thead class="thead-dark">
-                <tr>
+                <tr class="text-center">
                     <th>ID</th>
                     <th>Nombre</th>
                     <th style="width: 20%;">Detalles</th>
@@ -59,15 +59,15 @@
                 </thead>
                 <tbody>
                 <tr th:each="vehiculo : ${vehiculos}">
-                    <td th:text="${vehiculo.idVehi}"></td>
+                    <td class="text-center" th:text="${vehiculo.idVehi}"></td>
                     <td th:text="${vehiculo.nombre}"></td>
                     <td th:text="${vehiculo.detalles}"></td>
-                    <td th:text="${vehiculo.activo ? 'Disponible' : 'No Disponible'}"></td>
-                    <td th:text="${#dates.format(vehiculo.fecha_lanzamiento, 'dd-MM-yyyy')}"></td>
-                    <td th:text="${vehiculo.stock}"></td>
-                    <td th:text="${vehiculo.precio}"></td>
-                    <td th:text="${vehiculo.categoria}"></td>
-                    <td th:text="${vehiculo.lastUpdate}"></td>
+                    <td class="text-center" th:text="${vehiculo.activo ? 'Disponible' : 'No Disponible'}"></td>
+                    <td class="text-center" th:text="${#dates.format(vehiculo.fecha_lanzamiento, 'dd-MM-yyyy')}"></td>
+                    <td class="text-center" th:text="${vehiculo.stock}"></td>
+                    <td class="text-center" th:text="${vehiculo.precio}"></td>
+                    <td class="text-center" th:text="${vehiculo.categoria}"></td>
+                    <td class="text-center" th:text="${vehiculo.lastUpdate}"></td>
 
 
 <!--                    <td style="width: auto; text-align: center;">-->
@@ -119,6 +119,7 @@
                 </tr>
                 </tbody>
             </table>
+
         </div>
     </div>
 </div>
